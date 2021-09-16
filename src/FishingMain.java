@@ -51,6 +51,7 @@ public class FishingMain extends AbstractScript implements ChatListener {
     }
 
     public void onStart() {
+
         SkillTracker.start(Skill.FISHING);
         beginningXP = Skills.getExperience(Skill.FISHING);
         Timer TTLV = new Timer();
@@ -156,6 +157,9 @@ public class FishingMain extends AbstractScript implements ChatListener {
 
     @Override
     public void onPaint(Graphics2D g) {
+        drawMouseUtil.drawRandomMouse(g);
+        drawMouseUtil.drawRandomMouseTrail(g);
+        drawMouseUtil.setRandomColor();
         long ttl = SkillTracker.getTimeToLevel(Skill.FISHING);
         long timeTNL = ttl;
         g.setColor(Color.CYAN);
@@ -166,8 +170,6 @@ public class FishingMain extends AbstractScript implements ChatListener {
         Polygon tile = Map.getPolygon(getLocalPlayer().getTile());
 
         g.drawPolygon(tile);
-        drawMouseUtil.drawRandomMouse(g);
-        drawMouseUtil.setRainbow(true);
         currentXp = Skills.getExperience(Skill.FISHING);
         xpGained = currentXp - beginningXP;
         SkillTracker.getTimeToLevel(Skill.FISHING);
